@@ -2,8 +2,11 @@ import streamlit as st
 import pickle
 
 # Load trained model and vectorizer
-model = pickle.load(open("model/spam_model.pkl", "rb"))
-vectorizer = pickle.load(open("model/vectorizer.pkl", "rb"))
+with open("model/spam_model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+with open("model/vectorizer.pkl", "rb") as f:
+    vectorizer = pickle.load(f)
 
 # Page configuration
 st.set_page_config(
@@ -18,7 +21,7 @@ st.markdown("""
 
 /* 3-Color Classy Gradient Background */
 .stApp {
-    background: linear-gradient(135deg, #a770ef ,#cf8bf3 ,#fdb99b);
+    background: linear-gradient(135deg, #a770ef, #cf8bf3, #fdb99b);
     background-attachment: fixed;
 }
 
@@ -39,7 +42,7 @@ textarea {
 
 /* Button Styling */
 .stButton>button {
-    background: linear-gradient(90deg, #c33764 ,#1d2671);
+    background: linear-gradient(90deg, #c33764, #1d2671);
     color: white;
     font-size: 18px;
     border-radius: 10px;
@@ -49,7 +52,7 @@ textarea {
 
 /* Button Hover Effect */
 .stButton>button:hover {
-    background: linear-gradient(135deg, #03001e ,#7303c0 ,#ec38bc );
+    background: linear-gradient(135deg, #03001e, #7303c0, #ec38bc);
 }
 
 </style>
