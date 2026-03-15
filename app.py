@@ -2,11 +2,8 @@ import streamlit as st
 import pickle
 
 # Load trained model and vectorizer
-with open("model/spam_model.pkl", "rb") as f:
-    model = pickle.load(f)
-
-with open("model/vectorizer.pkl", "rb") as f:
-    vectorizer = pickle.load(f)
+model = pickle.load(open("model/spam_model.pkl", "rb"))
+vectorizer = pickle.load(open("model/vectorizer.pkl", "rb"))
 
 # Page configuration
 st.set_page_config(
@@ -75,6 +72,5 @@ if st.button("Check Message"):
             st.error("🚨 This is a Spam Message")
         else:
             st.success("✅ This is Not Spam")
-
     else:
         st.warning("⚠ Please enter a message first!")
