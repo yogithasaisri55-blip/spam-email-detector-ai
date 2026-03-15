@@ -1,9 +1,6 @@
 import streamlit as st
 import pickle
-
-# Load trained model and vectorizer
-model = pickle.load(open("model/spam_model.pkl", "rb"))
-vectorizer = pickle.load(open("model/vectorizer.pkl", "rb"))
+import os
 
 # Page configuration
 st.set_page_config(
@@ -12,44 +9,54 @@ st.set_page_config(
     layout="centered"
 )
 
+# Load model safely
+MODEL_PATH = "model/spam_model.pkl"
+VECTORIZER_PATH = "model/vectorizer.pkl"
+
+if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
+    st.error("❌ Model files not found. Please check the 'model' folder in the repository.")
+    st.stop()
+
+model = pickle.load(open(MODEL_PATH, "rb"))
+vectorizer = pickle.load(open(VECTORIZER_PATH, "rb"))
+
 # Custom CSS styling
 st.markdown("""
 <style>
 
 /* 3-Color Classy Gradient Background */
 .stApp {
-    background: linear-gradient(135deg, #a770ef, #cf8bf3, #fdb99b);
+    background: linear-gradient(135deg,#a770ef,#cf8bf3,#fdb99b);
     background-attachment: fixed;
 }
 
-/* Title Styling */
+/* Title */
 h1 {
-    text-align: center;
-    color: white;
-    font-size: 45px;
-    font-weight: bold;
+    text-align:center;
+    color:white;
+    font-size:45px;
+    font-weight:bold;
 }
 
-/* Text Area Styling */
+/* Textbox */
 textarea {
-    border-radius: 12px !important;
-    border: 2px solid white !important;
-    padding: 10px !important;
+    border-radius:12px !important;
+    border:2px solid white !important;
+    padding:10px !important;
 }
 
-/* Button Styling */
+/* Button */
 .stButton>button {
-    background: linear-gradient(90deg, #c33764, #1d2671);
-    color: white;
-    font-size: 18px;
-    border-radius: 10px;
-    padding: 10px 25px;
-    border: none;
+    background: linear-gradient(90deg,#c33764,#1d2671);
+    color:white;
+    font-size:18px;
+    border-radius:10px;
+    padding:10px 25px;
+    border:none;
 }
 
-/* Button Hover Effect */
 .stButton>button:hover {
-    background: linear-gradient(135deg, #03001e, #7303c0, #ec38bc);
+    background: linear-gradient(135deg,#03001e,#7303c0,#ec38bc);
 }
 
 </style>
